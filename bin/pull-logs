@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+
+var argv = require('yargs')
+  .usage('Usage: $0')
+  .example('$0', 'Pulls logs from kibana and formats output')
+  .help('h')
+  .alias('h', 'help')
+  .option('n', {
+    alias: 'number',
+    describe: 'The max number of results ElasticSearch will return',
+    default: 5
+  })
+  .option('q', {
+    alias: 'query',
+    describe: 'the query to perform in ElasticSearch',
+    required: true
+  })
+  .option('t', {
+    alias: 'timestamp',
+    describe: 'prepend timestamp to logs',
+    boolean: true
+  })
+  .option('f', {
+    describe: 'stream output as data is pumped into ElasticSearch',
+    boolean: true
+  })
+  .option('r', {
+    alias: 'refresh',
+    describe: 'refresh rate for streaming output (ms)',
+    default: 500
+  })
+  .argv
+
+var gatherLogs = require('../lib')
+
+var args = {
+  size: argv.n,
+  query: argv.q,
+  showTimestamp: argv.t
+}
+gatherLogs(args, handleLogs)
+
+function handleLogs(err, data) {
+  if (err) {
+    throw err
+  }
+
+  if (data.logs) {
+    console.log(data.logs)
+  }
+
+  if (argv.f) {
+    setTimeout(function() {
+      args.timestampFilter = data.latest
+      gatherLogs(args, handleLogs)
+    }, argv.r)
+  }
+}
