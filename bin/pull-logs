@@ -15,6 +15,11 @@ var argv = require('yargs')
     describe: 'the query to perform in ElasticSearch',
     required: true
   })
+  .option('i', {
+    alias: 'instance-name',
+    describe: 'prepend instance name to logs',
+    boolean: true
+  })
   .option('t', {
     alias: 'timestamp',
     describe: 'prepend timestamp to logs',
@@ -36,7 +41,8 @@ var gatherLogs = require('../lib')
 var args = {
   size: argv.n,
   query: argv.q,
-  showTimestamp: argv.t
+  showTimestamp: argv.t,
+  showInstanceName: argv.i
 }
 gatherLogs(args, handleLogs)
 

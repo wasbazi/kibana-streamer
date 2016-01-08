@@ -33,12 +33,13 @@ This utility comes with all sorts of useful features
 	Usage: bin/pull-logs
 
 	Options:
-		-h, --help       Show help  [boolean]
-		-n, --number     The max number of results ElasticSearch will return  [default: 5]
-		-q, --query      the query to perform in ElasticSearch  [required]
-		-t, --timestamp  prepend timestamp to logs  [boolean]
-		-f               stream output as data is pumped into ElasticSearch  [boolean]
-		-r, --refresh    refresh rate for streaming output (ms)  [default: 500]
+		-h, --help           Show help  [boolean]
+		-n, --number         The max number of results ElasticSearch will return  [default: 5]
+		-q, --query          the query to perform in ElasticSearch  [required]
+		-i, --instance-name  prepend instance name to logs  [boolean]
+		-t, --timestamp      prepend timestamp to logs  [boolean]
+		-f                   stream output as data is pumped into ElasticSearch  [boolean]
+		-r, --refresh        refresh rate for streaming output (ms)  [default: 500]
 
 	Examples:
 		bin/pull-logs  Pulls logs from kibana and formats output
