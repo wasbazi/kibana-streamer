@@ -1,13 +1,15 @@
 {
   "name": "kibana-streamer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This tool is handy for streaming logs from a specific application and/or task",
   "repository": {
     "type": "git",
     "url": "git@github.com:wasbazi/kibana-streamer.git"
   },
   "main": "index.js",
-  "bin": { "kibana-streamer": "./bin/pull-logs" },
+  "bin": {
+    "kibana-streamer": "./bin/pull-logs"
+  },
   "dependencies": {
     "config": "^1.17.1",
     "yargs": "^3.31.0",
